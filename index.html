@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Button Class Example</title>
+    <style>
+        .form {
+            border: 1px solid #999;
+            padding: 20px;
+        }
+
+        button,
+        input {
+            padding: 20px;
+        }
+
+        button.success {
+            background-color: green;
+            color: white
+        }
+
+        button.danger {
+            background-color: red;
+            color: white
+        }
+
+        button.warning {
+            background-color: orange;
+            color: white
+        }
+
+        button.disabled {
+            background-color: gray;
+            color: black
+        }
+
+        button.default {
+            background-color: white;
+            color: black
+        }
+    </style>
+</head>
+
+<body>
+
+    <form class="form">
+        <input type="text" placeholder="some dummy input">
+        <div id="actions">
+            <!-- insert buttons inside this element! -->
+        </div>
+    </form>
+
+    <script>
+
+      let div = document.getElementById('actions');
+
+        class Button {
+            constructor(text, type, action) {
+                this.text = text;
+                this.type = type;
+                this.action = action;
+            }
+
+            render(parrent_id) {
+              // Create Button element
+              let button = document.createElement('button');
+              // Add class
+              button.className = this.type;
+              // Add event listener
+              button.addEventListener('click', this.action);
+              // Add text
+              button.appendChild(document.createTextNode(this.text));
+
+              // Append button to div
+              div.appendChild(button);
+
+              button.style.border = "3px solid #eee";
+                
+               // hint: html representation of the button - <button class="???" onclick="???">???</button> 
+            }
+
+        }
+
+        function okAction() {
+            alert("You've accepted")
+        }
+        function cancelAction() {
+            alert("You've canceled")
+        }
+
+        const btnOk = new Button('OK', "success", okAction);
+        btnOk.render('#actions');
+
+        const btnCancel = new Button("CANCEL", "danger", cancelAction);
+        btnCancel.render('#actions');
+       
+    </script>
+</body>
+
+</html>
